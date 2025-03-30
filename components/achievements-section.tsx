@@ -59,7 +59,9 @@ export default function DSAAchievementsSection({
 
         // Try to fetch from the local server first
         try {
-          const response = await fetch("http://localhost:4000/solved-problems");
+          const response = await fetch(
+            "https://portfolio-backend-f92b.onrender.com/solved-problems"
+          );
           if (response.ok) {
             const data = await response.json();
 
@@ -289,9 +291,9 @@ export default function DSAAchievementsSection({
         >
           <Card className="overflow-hidden border-2 hover:border-primary transition-all duration-300 hover:shadow-xl">
             <CardHeader className="bg-primary/10 border-b">
-              <CardTitle className="text-xl flex items-center justify-between">
+              <CardTitle className="text-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                 <span>Recent LeetCode Challenges</span>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   {serverConnected && (
                     <Badge
                       variant="outline"
@@ -301,9 +303,7 @@ export default function DSAAchievementsSection({
                     </Badge>
                   )}
                   {leetcodeUsername && (
-                    <Badge variant="outline" className="ml-2">
-                      @{leetcodeUsername}
-                    </Badge>
+                    <Badge variant="outline">@{leetcodeUsername}</Badge>
                   )}
                 </div>
               </CardTitle>
@@ -330,37 +330,47 @@ export default function DSAAchievementsSection({
                         style={{ transitionDelay: `${0.9 + 0.1 * index}s` }}
                       >
                         <Card className="overflow-hidden border hover:border-primary/50 transition-all duration-300 hover:shadow-md">
-                          <CardContent className="p-4 flex items-center justify-between">
-                            <div className="flex items-center gap-3">
-                              {challenge.completed ? (
-                                <CheckCircle2 className="h-5 w-5 text-green-500" />
-                              ) : (
-                                <div className="h-5 w-5 rounded-full border-2 border-muted-foreground/30"></div>
-                              )}
-                              <div>
-                                <p className="font-medium">{challenge.title}</p>
-                                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                  <span className="font-semibold">
-                                    LeetCode
-                                  </span>
-                                  <span>•</span>
-                                  <span>{challenge.category}</span>
-                                  {challenge.solvedAt && (
-                                    <>
-                                      <span>•</span>
-                                      <span>Solved: {challenge.solvedAt}</span>
-                                    </>
-                                  )}
+                          <CardContent className="p-4">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                              <div className="flex items-center gap-3">
+                                {challenge.completed ? (
+                                  <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-green-500" />
+                                ) : (
+                                  <div className="h-5 w-5 flex-shrink-0 rounded-full border-2 border-muted-foreground/30"></div>
+                                )}
+                                <div className="min-w-0">
+                                  <p className="font-medium text-sm truncate">
+                                    {challenge.title}
+                                  </p>
+                                  <div className="flex flex-wrap items-center gap-1 text-xs text-muted-foreground">
+                                    <span className="font-semibold">
+                                      LeetCode
+                                    </span>
+                                    <span>•</span>
+                                    <span className="truncate">
+                                      {challenge.category}
+                                    </span>
+                                    {challenge.solvedAt && (
+                                      <>
+                                        <span className="hidden sm:inline">
+                                          •
+                                        </span>
+                                        <span className="truncate hidden sm:inline">
+                                          Solved: {challenge.solvedAt}
+                                        </span>
+                                      </>
+                                    )}
+                                  </div>
                                 </div>
                               </div>
+                              <Badge
+                                className={`${getDifficultyColor(
+                                  challenge.difficulty
+                                )} self-start sm:self-center flex-shrink-0 text-xs`}
+                              >
+                                {challenge.difficulty}
+                              </Badge>
                             </div>
-                            <Badge
-                              className={`${getDifficultyColor(
-                                challenge.difficulty
-                              )}`}
-                            >
-                              {challenge.difficulty}
-                            </Badge>
                           </CardContent>
                         </Card>
                       </a>
