@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Send, CheckCircle, Code } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle2, Code } from "lucide-react";
 import { SuperButton } from "@/components/super-button";
 
 export default function ContactSection() {
@@ -111,7 +111,7 @@ export default function ContactSection() {
           <h4 className="text-lg font-medium mb-4">Connect on Social Media</h4>
           <div className="flex space-x-4">
             <a
-              href="https://in.linkedin.com/in/srijit-das-dsce-2024-2028-blr"
+              href="#"
               className="bg-muted/80 p-3 rounded-full hover:bg-primary/20 transition-colors hover:-translate-y-2 transform duration-200"
             >
               <svg
@@ -132,7 +132,7 @@ export default function ContactSection() {
               </svg>
             </a>
             <a
-              href="https://github.com/student-srijit"
+              href="#"
               className="bg-muted/80 p-3 rounded-full hover:bg-primary/20 transition-colors hover:-translate-y-2 transform duration-200"
             >
               <svg
@@ -152,7 +152,7 @@ export default function ContactSection() {
               </svg>
             </a>
             <a
-              href="https://x.com/SrijitDas217890"
+              href="#"
               className="bg-muted/80 p-3 rounded-full hover:bg-primary/20 transition-colors hover:-translate-y-2 transform duration-200"
             >
               <svg
@@ -171,7 +171,7 @@ export default function ContactSection() {
               </svg>
             </a>
             <a
-              href="https://www.instagram.com/srijit__das__/"
+              href="#"
               className="bg-muted/80 p-3 rounded-full hover:bg-primary/20 transition-colors hover:-translate-y-2 transform duration-200"
             >
               <svg
@@ -215,22 +215,22 @@ export default function ContactSection() {
             <div className="absolute inset-0 overflow-hidden opacity-5">
               <pre className="text-xs text-primary">
                 {`function ContactMe() {
-  const [message, setMessage] = useState('');
-  const sendMessage = async () => {
-    await fetch('/api/contact', {
-      method: 'POST',
-      body: JSON.stringify({ message })
-    });
-    return 'Thank you for your message!';
-  };
-  return <Form onSubmit={sendMessage} />;
+const [message, setMessage] = useState('');
+const sendMessage = async () => {
+  await fetch('/api/contact', {
+    method: 'POST',
+    body: JSON.stringify({ message })
+  });
+  return 'Thank you for your message!';
+};
+return <Form onSubmit={sendMessage} />;
 }`}
               </pre>
             </div>
 
             {submitted ? (
               <div className="bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-300 p-6 rounded-md flex items-center gap-3 animate-fadeIn">
-                <CheckCircle className="h-6 w-6" />
+                <CheckCircle2 className="h-6 w-6" />
                 <div>
                   <h4 className="font-medium">Message Sent Successfully!</h4>
                   <p>Thank you for your message. I'll get back to you soon.</p>
@@ -251,7 +251,7 @@ export default function ContactSection() {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="shuvam"
+                      placeholder="John Doe"
                       className="border-muted-foreground/20 focus:border-primary transition-all duration-300 group-hover:border-primary/50"
                       required
                     />
@@ -270,7 +270,7 @@ export default function ContactSection() {
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="shuvam@gmail.com"
+                      placeholder="john@example.com"
                       className="border-muted-foreground/20 focus:border-primary transition-all duration-300 group-hover:border-primary/50"
                       required
                     />
@@ -367,7 +367,7 @@ export default function ContactSection() {
                           <Send className="h-5 w-5" />
                           Initiate Collaboration
                         </span>
-                        <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
+                        <span className="absolute inset-0 w-0 h-full bg-white/20 transform transition-all duration-300 group-hover:w-full"></span>
                       </>
                     )}
                   </SuperButton>
