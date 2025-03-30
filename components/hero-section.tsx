@@ -273,20 +273,18 @@ export default function HeroSection({ onScrollDown }: HeroSectionProps) {
 
       {/* Scroll down indicator - moved down and separated from buttons */}
       <div
-        className={`absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 cursor-pointer transition-all duration-1000 ${
+        className={`absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20 cursor-pointer transition-all duration-1000 hidden md:flex flex-col items-center ${
           isLoaded ? "opacity-100" : "opacity-0"
         } animate-bounce-custom`}
         style={{ transitionDelay: "1.5s" }}
         onClick={onScrollDown}
       >
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-sm font-medium text-muted-foreground">
-            Scroll Down
-          </span>
-          <div className="relative">
-            <ChevronDown className="h-6 w-6 text-primary" />
-            <span className="absolute inset-0 rounded-full animate-ping bg-primary/30"></span>
-          </div>
+        <span className="text-sm font-medium text-muted-foreground">
+          Scroll Down
+        </span>
+        <div className="relative">
+          <ChevronDown className="h-6 w-6 text-primary" />
+          <span className="absolute inset-0 rounded-full animate-ping bg-primary/30"></span>
         </div>
       </div>
 
