@@ -222,7 +222,7 @@ export default function Home() {
       </div>
 
       {/* Navigation */}
-      <header className="sticky top-0 z-[60] w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-header w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <div
             className="font-bold text-xl opacity-0 animate-fadeIn"
@@ -262,9 +262,7 @@ export default function Home() {
                   ? "DSA"
                   : section.charAt(0).toUpperCase() + section.slice(1)}
                 <span
-                  className={`absolute -bottom-1 left-  + section.slice(1)}
-                <span
-                  className={\`absolute -bottom-1 left-0 right-0 h-0.5 bg-primary transform origin-left transition-transform duration-300 ${
+                  className={`absolute -bottom-1 left-0 right-0 h-0.5 bg-primary transform origin-left transition-transform duration-300 ${
                     activeSection ===
                     (section === "dsa" ? "achievements" : section)
                       ? "scale-x-100"
@@ -277,7 +275,7 @@ export default function Home() {
 
           <div className="flex items-center gap-4">
             <ThemeToggle />
-            <div className="md:hidden relative z-50">
+            <div className="md:hidden">
               <MobileNav
                 activeSection={activeSection}
                 onNavigate={scrollToSection}
@@ -303,7 +301,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main>
+      <main className="z-content relative">
         {/* Hero Section */}
         <div style={{ transform: `translateY(${-scrollProgress * 100}px)` }}>
           <HeroSection onScrollDown={() => scrollToSection("about")} />
@@ -632,11 +630,12 @@ export default function Home() {
 
           <div className="border-t mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">
-              Â© {new Date().getFullYear()} Srijit Das. All rights reserved.
+              © {new Date().getFullYear()} Srijit Das. All rights reserved.
             </p>
           </div>
         </div>
       </footer>
+
       {/* Scroll to top button */}
       <div
         className={`fixed bottom-8 right-8 p-3 rounded-full bg-primary text-white shadow-lg cursor-pointer transition-all duration-300 z-50 ${
