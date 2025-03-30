@@ -44,7 +44,7 @@ export default function CursorFollower() {
 
   return (
     <div
-      className={`fixed rounded-full pointer-events-none z-30 transition-all duration-200 ${
+      className={`fixed rounded-full pointer-events-none transition-all duration-200 ${
         isVisible ? "opacity-100" : "opacity-0"
       } ${isHovering ? "w-12 h-12 bg-primary/40" : "w-8 h-8 bg-primary/20"}`}
       style={{
@@ -52,6 +52,7 @@ export default function CursorFollower() {
           position.y - (isHovering ? 24 : 16)
         }px)`,
         mixBlendMode: "difference",
+        zIndex: 30,
       }}
     />
   );
