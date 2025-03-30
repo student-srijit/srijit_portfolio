@@ -29,10 +29,12 @@ export default function ProjectDetailsDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="w-[90%] max-w-[500px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>{project.title}</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-xl break-words">
+            {project.title}
+          </DialogTitle>
+          <DialogDescription className="text-sm break-words">
             {project.longDescription || project.description}
           </DialogDescription>
         </DialogHeader>
@@ -40,39 +42,51 @@ export default function ProjectDetailsDialog({
           <div className="flex flex-wrap gap-2">
             {project.tags &&
               project.tags.map((tag: string) => (
-                <Badge key={tag} variant="secondary">
+                <Badge key={tag} variant="secondary" className="text-xs">
                   {tag}
                 </Badge>
               ))}
           </div>
           {project.imageUrl && (
-            <img
-              src={project.imageUrl || "/placeholder.svg"}
-              alt={project.title}
-              className="rounded-md aspect-video object-cover"
-            />
+            <div className="w-full overflow-hidden rounded-md">
+              <img
+                src={project.imageUrl || "/placeholder.svg"}
+                alt={project.title}
+                className="w-full h-auto object-cover aspect-video"
+              />
+            </div>
           )}
         </div>
-        <DialogFooter>
+        <DialogFooter className="flex flex-col sm:flex-row gap-2 mt-2">
           {project.liveUrl && (
-            <SuperButton variant="gradient" size="sm" asChild>
+            <SuperButton
+              variant="gradient"
+              size="sm"
+              asChild
+              className="w-full sm:w-auto"
+            >
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2"
+                className="flex items-center justify-center gap-2"
               >
                 Live Demo <ExternalLink className="h-4 w-4" />
               </a>
             </SuperButton>
           )}
           {project.githubUrl && (
-            <SuperButton variant="outline" size="sm" asChild>
+            <SuperButton
+              variant="outline"
+              size="sm"
+              asChild
+              className="w-full sm:w-auto"
+            >
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2"
+                className="flex items-center justify-center gap-2"
               >
                 View Code <Github className="h-4 w-4" />
               </a>
