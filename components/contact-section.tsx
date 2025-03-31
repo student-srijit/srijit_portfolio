@@ -111,7 +111,7 @@ export default function ContactSection() {
           <h4 className="text-lg font-medium mb-4">Connect on Social Media</h4>
           <div className="flex space-x-4">
             <a
-              href="#"
+              href="https://in.linkedin.com/in/srijit-das-dsce-2024-2028-blr"
               className="bg-muted/80 p-3 rounded-full hover:bg-primary/20 transition-colors hover:-translate-y-2 transform duration-200"
             >
               <svg
@@ -132,7 +132,7 @@ export default function ContactSection() {
               </svg>
             </a>
             <a
-              href="#"
+              href="https://github.com/student-srijit"
               className="bg-muted/80 p-3 rounded-full hover:bg-primary/20 transition-colors hover:-translate-y-2 transform duration-200"
             >
               <svg
@@ -152,7 +152,7 @@ export default function ContactSection() {
               </svg>
             </a>
             <a
-              href="#"
+              href="https://x.com/SrijitDas217890"
               className="bg-muted/80 p-3 rounded-full hover:bg-primary/20 transition-colors hover:-translate-y-2 transform duration-200"
             >
               <svg
@@ -171,7 +171,7 @@ export default function ContactSection() {
               </svg>
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/srijit__das__/"
               className="bg-muted/80 p-3 rounded-full hover:bg-primary/20 transition-colors hover:-translate-y-2 transform duration-200"
             >
               <svg
