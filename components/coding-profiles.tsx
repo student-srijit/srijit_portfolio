@@ -249,7 +249,7 @@ export default function CodingProfiles() {
 
                 // Derived Stats: Stars & Languages
                 if (repos) {
-                    const stars = repos.reduce((acc: number, repo: any) => acc + (repo.stargazers_count || 0), 0);
+                    const stars = (repos as GitHubRepo[]).reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0);
                     setTotalStars(stars);
 
                     const langMap: Record<string, number> = {};
