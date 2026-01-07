@@ -42,7 +42,8 @@ export default function MobileNav({
     { name: "Experience", section: "experience" },
     { name: "Projects", section: "projects" },
     { name: "Skills", section: "skills" },
-    { name: "DSA", section: "achievements" },
+    { name: "Achievements", section: "achievements" },
+    { name: "DSA", section: "coding-profiles" },
     { name: "Hobbies", section: "hobbies" },
     { name: "Contact", section: "contact" },
   ];

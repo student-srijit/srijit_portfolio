@@ -31,6 +31,7 @@ import { LoadingScreen } from "@/components/loading-screen";
 import { AnimatePresence } from "framer-motion";
 import { projects, personalInfo } from "@/lib/data";
 import Hobbies from "@/components/hobbies";
+import AchievementsShowcase from "@/components/achievements-showcase";
 
 export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -158,19 +159,20 @@ export default function Home() {
                   "experience",
                   "projects",
                   "skills",
-                  "dsa",
+                  "achievements",
+                  "coding-profiles",
                   "hobbies",
                   "contact",
                 ].map((section, index) => (
                   <a
                     key={section}
-                    href={`#${section === "dsa" ? "achievements" : section}`}
+                    href={`#${section}`}
                     onClick={(e) => {
                       e.preventDefault();
-                      scrollToSection(section === "dsa" ? "achievements" : section);
+                      scrollToSection(section);
                     }}
                     className={`text-sm font-medium hover:text-primary transition-colors relative ${activeSection ===
-                      (section === "dsa" ? "achievements" : section)
+                      section
                       ? "text-primary"
                       : ""
                       } opacity-0 animate-fadeIn group`}
@@ -179,12 +181,12 @@ export default function Home() {
                       animationFillMode: "forwards",
                     }}
                   >
-                    {section === "dsa"
+                    {section === "coding-profiles"
                       ? "DSA"
                       : section.charAt(0).toUpperCase() + section.slice(1)}
                     <span
                       className={`absolute -bottom-1 left-0 right-0 h-0.5 bg-primary transform origin-left transition-transform duration-300 ${activeSection ===
-                        (section === "dsa" ? "achievements" : section)
+                        section
                         ? "scale-x-100"
                         : "scale-x-0 group-hover:scale-x-100"
                         }`}
@@ -408,6 +410,19 @@ export default function Home() {
               id="achievements"
               ref={achievementsRef}
               className="py-20 md:py-32 scroll-mt-16 relative overflow-hidden"
+            >
+              <div className="container relative z-10">
+                <AchievementsShowcase />
+              </div>
+
+              {/* Background decorative elements */}
+              <div className="absolute top-1/3 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
+            </section>
+
+            {/* Coding Profiles (DSA) Section */}
+            <section
+              id="coding-profiles"
+              className="py-20 md:py-32 scroll-mt-16 relative overflow-hidden bg-muted/30"
             >
               <div className="container relative z-10">
                 <CodingProfiles />
