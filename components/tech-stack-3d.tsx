@@ -32,7 +32,7 @@ function Floor(props: any) {
             <planeGeometry args={[100, 100]} />
             <MeshReflectorMaterial
                 blur={[300, 100]}
-                resolution={1024}
+                resolution={512} // Reduced from 1024 for performance
                 mixBlur={1}
                 mixStrength={40}
                 roughness={1}
@@ -167,13 +167,13 @@ function BallSpawner() {
 export default function TechStack3D() {
     return (
         <div className="w-full h-[600px] relative">
-            <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 5, 12], fov: 45 }}>
+            <Canvas shadows dpr={[1, 1.5]} camera={{ position: [0, 5, 12], fov: 45 }}>
                 <ambientLight intensity={0.5} />
                 <directionalLight
                     castShadow
                     position={[10, 20, 10]}
                     intensity={1.5}
-                    shadow-mapSize={[1024, 1024]}
+                    shadow-mapSize={[512, 512]} // Reduced from 1024
                 />
                 {/* Environment for realistic reflections */}
                 <Environment preset="city" />
