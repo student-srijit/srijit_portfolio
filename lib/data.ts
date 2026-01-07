@@ -21,6 +21,7 @@ export const personalInfo = {
     githubUrl: "https://github.com/student-srijit",
     linkedinUrl: "https://linkedin.com/in/srijit-das",
     bio: "I'm a passionate developer with a strong foundation in both web development and machine learning. I love building scalable applications and solving complex problems using AI/ML.",
+    profileImage: "profile-image.jpg",
 };
 
 export const projects = [
@@ -30,7 +31,7 @@ export const projects = [
         tags: ["Next.js", "TypeScript", "Python", "YOLOv8", "OpenCV", "MongoDB"],
         githubUrl: "https://github.com/Anubhab-Rakshit/mareye-ai",
 
-        imageUrl: "/mereye.png",
+        imageUrl: "mereye.png",
     },
     {
         title: "Web3 Crowdfunding",
@@ -38,7 +39,7 @@ export const projects = [
         tags: ["Next.js", "Solidity", "Move", "Celo", "TypeScript"],
         githubUrl: "https://github.com/student-srijit/aptosweb3",
 
-        imageUrl: "/web3-crowdfunding.png",
+        imageUrl: "web3-crowdfunding.png",
     },
     {
         title: "LiquidPay",
@@ -46,7 +47,7 @@ export const projects = [
         tags: ["Next.js", "Python", "ML", "Node.js", "TailwindCSS"],
         githubUrl: "https://github.com/student-srijit/liquidPay",
 
-        imageUrl: "/liquidpay.png",
+        imageUrl: "liquidpay.png",
     },
     {
         title: "Oceanova",
@@ -54,7 +55,7 @@ export const projects = [
         tags: ["Next.js", "Firebase", "Python", "AI", "Solidity"],
         githubUrl: "https://github.com/student-srijit/Aquanautical",
 
-        imageUrl: "/oceanova.png",
+        imageUrl: "oceanova.png",
     },
 ];
 
@@ -90,7 +91,7 @@ export const experience = [
             "Focusing on Data Structures, Algorithms, and System Design.",
             "Active member of technical societies and coding clubs.",
         ],
-        imageUrl: "/dsce-campus.jpg",
+        imageUrl: "dsce-campus.jpg",
     },
 ];
 

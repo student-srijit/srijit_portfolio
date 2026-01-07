@@ -271,8 +271,8 @@ export default function Home() {
 
                         {/* Image */}
                         <img
-                          src="/profile.jpeg"
-                          alt="Srijit Das"
+                          src={personalInfo.profileImage}
+                          alt={personalInfo.name}
                           className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
                         />
 

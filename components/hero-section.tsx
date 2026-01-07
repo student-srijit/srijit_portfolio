@@ -254,7 +254,7 @@ export default function HeroSection({ onScrollDown }: HeroSectionProps) {
                 {/* Resume Card */}
                 <div className="relative bg-white text-black rounded-lg shadow-2xl overflow-hidden max-h-[600px] w-full max-w-[450px] mx-auto transform transition-transform duration-500 hover:scale-[1.01] border border-gray-100">
                   <img
-                    src="/resume_preview.png"
+                    src="resume_preview.png"
                     alt="Srijit Das Resume Preview"
                     className="w-full h-auto object-cover"
                   />
