@@ -21,7 +21,7 @@ export const personalInfo = {
     githubUrl: "https://github.com/student-srijit",
     linkedinUrl: "https://linkedin.com/in/srijit-das",
     bio: "I'm a passionate developer with a strong foundation in both web development and machine learning. I love building scalable applications and solving complex problems using AI/ML.",
-    profileImage: "profile-image.jpg",
+    profileImage: "profile.jpeg",
 };
 
 export const projects = [
