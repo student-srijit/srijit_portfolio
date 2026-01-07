@@ -90,6 +90,7 @@ export const experience = [
             "Focusing on Data Structures, Algorithms, and System Design.",
             "Active member of technical societies and coding clubs.",
         ],
+        imageUrl: "/dsce-campus.jpg",
     },
 ];
 

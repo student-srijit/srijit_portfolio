@@ -55,7 +55,7 @@ export default function Hobbies() {
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full h-[55vh] items-stretch">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full h-auto lg:h-[55vh] items-stretch">
                 {hobbies.map((hobby, index) => (
                     <motion.div
                         key={index}

@@ -60,6 +60,17 @@ export default function ExperienceTimeline() {
                     </li>
                   ))}
                 </ul>
+                {/* Generic Image Support (e.g. Campus Photo) */}
+                {/* @ts-ignore */}
+                {item.imageUrl && (
+                  <div className="mt-6 rounded-xl overflow-hidden shadow-lg border border-white/5">
+                    <img
+                      src={/* @ts-ignore */ item.imageUrl}
+                      alt={item.title}
+                      className="w-full h-48 object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
