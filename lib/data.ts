@@ -147,3 +147,59 @@ export const achievements = {
         }
     ]
 };
+
+export const newAchievements = {
+    keyStats: [
+        {
+            icon: "Trophy",
+            value: "3x",
+            title: "Hackathon Winner",
+            detail: "Secured 1st place in national level hackathons",
+            color: "bg-yellow-500"
+        },
+        {
+            icon: "Star",
+            value: "12x",
+            title: "Top 10 Finalist",
+            detail: "Consistently ranked among top teams",
+            color: "bg-blue-500"
+        },
+        {
+            icon: "GitPullRequest",
+            value: "Guardian",
+            title: "LeetCode Badge",
+            detail: "Top tier competitive programming ranking",
+            color: "bg-orange-500"
+        }
+    ],
+    items: [
+        {
+            title: "SIH 2025 Internal Round",
+            result: "Cleared",
+            description: "Developed 'Mar-Eye', an underwater autonomous vehicle vision system.",
+            category: "competition",
+            year: "2025"
+        },
+        {
+            title: "BruteForce Hackathon 2025",
+            result: "1st Runner Up",
+            description: "Built an automated admin-mapped pet servicing platform.",
+            category: "competition",
+            year: "2025"
+        },
+        {
+            title: "Felicity Hackathon",
+            result: "Finalist",
+            description: "Top 15 out of 200+ teams.",
+            category: "competition",
+            year: "2025"
+        },
+        {
+            title: "Hacktoberfest 2025",
+            result: "Completed",
+            description: "6 accepted PRs across distributed systems repositories.",
+            category: "opensource",
+            year: "2025"
+        }
+    ]
+};
