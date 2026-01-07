@@ -142,7 +142,7 @@ export default function HeroSection({ onScrollDown }: HeroSectionProps) {
             <span className="px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium relative overflow-hidden group">
               <span className="relative z-10 flex items-center gap-2">
                 <Code className="h-4 w-4" />
-                <span>Full Stack Web Developer</span>
+                <span>AI/ML & Full Stack Developer</span>
               </span>
               <span className="absolute inset-0 bg-primary/10 w-0 group-hover:w-full transition-all duration-700"></span>
             </span>
@@ -197,9 +197,8 @@ export default function HeroSection({ onScrollDown }: HeroSectionProps) {
               }`}
             style={{ transitionDelay: "0.4s" }}
           >
-            I build modern, responsive web applications with a focus on user
-            experience and performance. Passionate about data structures,
-            algorithms, and solving complex problems.
+            Building intelligent AI systems and scalable web applications.
+            Passionate about deep learning, computer vision, and solving complex problems with code.
           </p>
 
           <div
