@@ -32,6 +32,9 @@ import { AnimatePresence } from "framer-motion";
 import { projects, personalInfo } from "@/lib/data";
 import Hobbies from "@/components/hobbies";
 import AchievementsShowcase from "@/components/achievements-showcase";
+import dynamic from "next/dynamic";
+
+const TechStack3D = dynamic(() => import("@/components/tech-stack-3d"), { ssr: false });
 
 export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -402,6 +405,9 @@ export default function Home() {
                   </p>
                 </div>
                 <SkillsSection />
+                <div className="mt-20">
+                  <TechStack3D />
+                </div>
               </div>
             </section>
 

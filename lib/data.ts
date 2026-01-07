@@ -79,7 +79,7 @@ export const experience = [
             "Engineered 'Mar-Eye', a CNN/YOLO-based underwater object detection system for SIH 2025 (Internal Round Cleared).",
             "Optimized models for edge deployment on NVIDIA Jetson using TensorRT and ONNX Runtime for low-latency inference.",
             "Developed an AI assistant for 'Oceanova' to identify marine species and monitor contamination levels.",
-            "Finalist at Felicity Hackathon and 1st Runner-up at BruteForce Hackathon for innovative ML-driven solutions.",
+            "Finalist at Felicity Hackathon and 1st Runner-up at BruteForce Hackathon for innovative solutions.",
         ],
     },
     {
@@ -96,15 +96,15 @@ export const experience = [
 ];
 
 export const skills = {
-    "Languages": ["C/C++", "Python", "JavaScript", "TypeScript", "SQL", "Solidity"],
+    "Languages": ["C/C++", "Python", "JavaScript", "TypeScript", "Solidity"],
     "Frameworks & Libraries": [
         "React", "Next.js", "Node.js", "Express.js",
         "TensorFlow", "PyTorch", "Scikit-learn", "Flask",
-        "TailwindCSS", "Redux"
+        "TailwindCSS"
     ],
     "Tools & Platforms": [
         "Git/GitHub", "Docker", "AWS", "MongoDB",
-        "VS Code", "Jupyter Notebook", "Vercel", "Firebase"
+        "VS Code", "Jupyter Notebook", "Vercel"
     ],
     "Core Computer Science": [
         "Data Structures & Algorithms",

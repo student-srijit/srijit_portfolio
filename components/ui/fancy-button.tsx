@@ -1,6 +1,7 @@
 "use client";
 
 import React, { forwardRef, type ReactNode, useState } from "react";
+import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
 
 type ButtonVariant = "3d" | "neon" | "magnetic" | "glitch" | "gradient";
@@ -57,10 +58,32 @@ const FancyButton = forwardRef<HTMLButtonElement, FancyButtonProps>(
       ? "hover:shadow-[0_0_15px_rgba(79,70,229,0.6)]"
       : "";
 
-    const Comp: React.ElementType =
-      asChild && React.isValidElement(children)
-        ? (children.type as React.ElementType)
-        : "button";
+    const Comp = asChild ? Slot : "button";
+
+    if (asChild) {
+      return (
+        <Comp
+          ref={ref}
+          className={cn(
+            baseClasses,
+            sizeClasses[size],
+            variantClasses[variant],
+            glowClasses,
+            className
+          )}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          data-text={
+            variant === "glitch" && typeof children === "string"
+              ? children
+              : undefined
+          }
+          {...props}
+        >
+          {children}
+        </Comp>
+      );
+    }
 
     return (
       <Comp
@@ -74,7 +97,11 @@ const FancyButton = forwardRef<HTMLButtonElement, FancyButtonProps>(
         )}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        data-text={variant === "glitch" ? children : undefined}
+        data-text={
+          variant === "glitch" && typeof children === "string"
+            ? children
+            : undefined
+        }
         {...props}
       >
         {icon && iconPosition === "left" && (
