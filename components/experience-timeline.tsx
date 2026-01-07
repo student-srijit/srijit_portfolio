@@ -1,177 +1,69 @@
 "use client";
 
 import { useRef } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Calendar, GraduationCap, Briefcase } from "lucide-react";
+import { useInView } from "framer-motion";
+import { Briefcase, Calendar } from "lucide-react";
+import { experience } from "@/lib/data";
 
 export default function ExperienceTimeline() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   return (
-    <div ref={containerRef} className="space-y-12 relative">
-      {/* Timeline line */}
-      <div className="absolute top-0 bottom-0 left-4 md:left-5 w-0.5 bg-primary/20"></div>
-      <div className="absolute top-0 bottom-0 left-4 md:left-5 w-0.5 bg-primary origin-top animate-growDown"></div>
+    <div ref={ref} className="relative container mx-auto px-4 py-8">
+      {/* Vertical line through the middle */}
+      <div className="absolute left-4 md:left-1/2 top-4 bottom-4 w-0.5 bg-gradient-to-b from-primary/20 via-primary/50 to-primary/20 hidden md:block transform -translate-x-1/2"></div>
 
-      <div
-        className="relative pl-8 md:pl-10 opacity-0 animate-fadeInUp"
-        style={{ animationDelay: "0.2s", animationFillMode: "forwards" }}
-      >
-        <div className="absolute w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center -left-1 border-2 border-primary z-10 hover:scale-110 hover:bg-primary/30 transition-all">
-          <Briefcase className="h-5 w-5 text-primary" />
-        </div>
-        <Card className="transform transition-all hover:scale-[1.02] hover:shadow-lg">
-          <CardHeader>
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-              <CardTitle className="text-xl">
-                Self-Employed Web Developer
-              </CardTitle>
-              <CardDescription className="flex items-center text-primary/80 font-medium">
-                <Calendar className="h-4 w-4 mr-1" />
-                2024 - Present
-              </CardDescription>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-              <li
-                className="opacity-0 animate-fadeInLeft"
-                style={{
-                  animationDelay: "0.3s",
-                  animationFillMode: "forwards",
-                }}
-              >
-                Designed and developed multiple websites for various clients,
-                focusing on user experience and responsiveness.
-              </li>
-              <li
-                className="opacity-0 animate-fadeInLeft"
-                style={{
-                  animationDelay: "0.4s",
-                  animationFillMode: "forwards",
-                }}
-              >
-                Implemented full-stack solutions using Node.js, Express.js, and
-                MongoDB, effectively streamlining backend processes.
-              </li>
-              <li
-                className="opacity-0 animate-fadeInLeft"
-                style={{
-                  animationDelay: "0.5s",
-                  animationFillMode: "forwards",
-                }}
-              >
-                Participated in several hackathons, collaborating with peers to
-                innovate and showcase technical skills under time constraints.
-              </li>
-              <li
-                className="opacity-0 animate-fadeInLeft"
-                style={{
-                  animationDelay: "0.6s",
-                  animationFillMode: "forwards",
-                }}
-              >
-                Developed a personalized birthday wishing application using
-                HTML, CSS, and JavaScript, enabling users to send customized
-                messages.
-              </li>
-              <li
-                className="opacity-0 animate-fadeInLeft"
-                style={{
-                  animationDelay: "0.7s",
-                  animationFillMode: "forwards",
-                }}
-              >
-                Utilized responsive design principles to ensure accessibility
-                across diverse devices.
-              </li>
-            </ul>
-          </CardContent>
-        </Card>
-      </div>
+      {/* Mobile vertical line */}
+      <div className="absolute left-4 top-4 bottom-4 w-0.5 bg-gradient-to-b from-primary/20 via-primary/50 to-primary/20 md:hidden"></div>
 
-      <div
-        className="relative pl-8 md:pl-10 opacity-0 animate-fadeInUp"
-        style={{ animationDelay: "0.4s", animationFillMode: "forwards" }}
-      >
-        <div className="absolute w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center -left-1 border-2 border-primary z-10 hover:scale-110 hover:bg-primary/30 transition-all">
-          <GraduationCap className="h-5 w-5 text-primary" />
-        </div>
-        <Card className="transform transition-all hover:scale-[1.02] hover:shadow-lg">
-          <CardHeader>
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-              <CardTitle className="text-xl">
-                Bachelor of Engineering (B.E.) in Computer Science
-              </CardTitle>
-              <CardDescription className="flex items-center text-primary/80 font-medium">
-                <Calendar className="h-4 w-4 mr-1" />
-                2024 - 2028
-              </CardDescription>
-            </div>
-            <CardDescription>
-              Dayanada Sagar College of Engineering, Bangalore, Karnataka
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-col md:flex-row gap-6">
-              <div className="md:w-2/3">
-                <p className="text-muted-foreground mb-4">
-                  Pursuing a comprehensive computer science education with focus
-                  on software development, algorithms, and data structures.
-                </p>
-                <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-                  <li
-                    className="opacity-0 animate-fadeInLeft"
-                    style={{
-                      animationDelay: "0.5s",
-                      animationFillMode: "forwards",
-                    }}
-                  >
-                    Core coursework in Data Structures, Algorithms, Database
-                    Management, and Web Development
-                  </li>
-                  <li
-                    className="opacity-0 animate-fadeInLeft"
-                    style={{
-                      animationDelay: "0.6s",
-                      animationFillMode: "forwards",
-                    }}
-                  >
-                    Active member of the college coding club and tech community
-                  </li>
-                  <li
-                    className="opacity-0 animate-fadeInLeft"
-                    style={{
-                      animationDelay: "0.7s",
-                      animationFillMode: "forwards",
-                    }}
-                  >
-                    Participating in various technical events and hackathons
-                  </li>
+      <div className="space-y-12">
+        {experience.map((item, index) => (
+          <div
+            key={index}
+            className={`relative flex flex-col md:flex-row gap-8 ${index % 2 === 0 ? "md:flex-row-reverse" : ""
+              }`}
+          >
+            {/* Timeline dot */}
+            <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background transform -translate-x-1/2 mt-1.5 z-10 shadow-[0_0_10px_rgba(124,58,237,0.5)]"></div>
+
+            {/* Content card */}
+            <div
+              className={`ml-12 md:ml-0 md:w-1/2 ${index % 2 === 0 ? "md:pl-12" : "md:pr-12"
+                } transition-all duration-700 transform ${isInView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
+                }`}
+              style={{ transitionDelay: `${index * 200}ms` }}
+            >
+              <div className="glass-panel p-6 hover:border-primary/50 transition-colors group">
+                <div className="flex flex-col gap-2 mb-4">
+                  <div className="flex items-center gap-2 text-primary font-semibold">
+                    <Briefcase className="w-4 h-4" />
+                    <span className="text-lg">{item.title}</span>
+                  </div>
+
+                  <div className="flex items-center justify-between text-sm text-muted-foreground">
+                    <span className="font-medium text-foreground/80">{item.company}</span>
+                    <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-primary/10 text-primary text-xs">
+                      <Calendar className="w-3 h-3" />
+                      <span>{item.period}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <ul className="space-y-2">
+                  {item.description.map((desc, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary/40 mt-1.5 shrink-0 group-hover:bg-primary transition-colors" />
+                      <span>{desc}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
-              <div
-                className="md:w-1/3 opacity-0 animate-fadeIn"
-                style={{
-                  animationDelay: "0.8s",
-                  animationFillMode: "forwards",
-                }}
-              >
-                <img
-                  src="/dsce-campus.jpg"
-                  alt="Dayanada Sagar College of Engineering"
-                  className="rounded-lg shadow-md w-full h-auto object-cover hover:shadow-xl transition-shadow duration-300"
-                />
-              </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        ))}
       </div>
     </div>
   );

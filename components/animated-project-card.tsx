@@ -19,7 +19,6 @@ interface AnimatedProjectCardProps {
   description: string;
   tags: string[];
   imageUrl: string;
-  liveUrl?: string;
   githubUrl?: string;
   index: number;
   onDetailsClick?: () => void;
@@ -30,7 +29,6 @@ export default function AnimatedProjectCard({
   description,
   tags,
   imageUrl,
-  liveUrl,
   githubUrl,
   index,
   onDetailsClick,
@@ -85,9 +83,8 @@ export default function AnimatedProjectCard({
 
   return (
     <div
-      className={`h-full transform transition-all duration-1000 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
-      }`}
+      className={`h-full transform transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+        }`}
       style={{ transitionDelay: `${0.2 * index}s` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => {
@@ -107,43 +104,28 @@ export default function AnimatedProjectCard({
         }}
       >
         <div
-          className={`absolute inset-0 bg-gradient-to-r from-primary/20 to-purple-500/20 transition-opacity duration-300 z-0 ${
-            isHovered ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 bg-gradient-to-r from-primary/20 to-purple-500/20 transition-opacity duration-300 z-0 ${isHovered ? "opacity-100" : "opacity-0"
+            }`}
         />
 
         <div className="aspect-video overflow-hidden relative">
           <img
             src={imageUrl || "/placeholder.svg"}
             alt={title}
-            className={`w-full h-full object-cover transition-all duration-500 ${
-              isHovered ? "scale-110 brightness-90" : "scale-100 brightness-100"
-            }`}
+            className={`w-full h-full object-cover transition-all duration-500 ${isHovered ? "scale-110 brightness-90" : "scale-100 brightness-100"
+              }`}
           />
           <div
-            className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-start p-4 transition-all duration-300 ${
-              isHovered ? "opacity-100" : "opacity-0"
-            }`}
+            className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end justify-start p-4 transition-all duration-300 ${isHovered ? "opacity-100" : "opacity-0"
+              }`}
           >
             <div
-              className={`transform transition-all duration-500 w-full flex justify-between ${
-                isHovered
+              className={`transform transition-all duration-500 w-full flex justify-between ${isHovered
                   ? "translate-y-0 opacity-100"
                   : "translate-y-10 opacity-0"
-              }`}
+                }`}
             >
               <div className="flex gap-2">
-                {liveUrl && (
-                  <SuperButton
-                    variant="spotlight"
-                    size="sm"
-                    icon={<ExternalLink className="h-4 w-4" />}
-                    onClick={() => window.open(liveUrl, "_blank")}
-                    className="bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm"
-                  >
-                    Live Demo
-                  </SuperButton>
-                )}
                 {githubUrl && (
                   <SuperButton
                     variant="neon"
@@ -171,18 +153,16 @@ export default function AnimatedProjectCard({
         <CardHeader className="relative z-10">
           <CardTitle className="text-xl group-hover:text-primary transition-colors flex items-center justify-between">
             <span
-              className={`transition-all duration-300 ${
-                isHovered ? "text-primary" : ""
-              }`}
+              className={`transition-all duration-300 ${isHovered ? "text-primary" : ""
+                }`}
             >
               {title}
             </span>
             <div
-              className={`transform transition-all duration-300 ${
-                isHovered
+              className={`transform transition-all duration-300 ${isHovered
                   ? "opacity-100 translate-x-0"
                   : "opacity-0 -translate-x-4"
-              }`}
+                }`}
               onClick={onDetailsClick}
               style={{ cursor: "pointer" }}
             >
@@ -199,9 +179,8 @@ export default function AnimatedProjectCard({
               <Badge
                 key={tagIndex}
                 variant="secondary"
-                className={`bg-secondary/50 transition-all duration-300 ${
-                  isHovered ? "bg-primary/20 text-primary" : ""
-                }`}
+                className={`bg-secondary/50 transition-all duration-300 ${isHovered ? "bg-primary/20 text-primary" : ""
+                  }`}
               >
                 {tag}
               </Badge>
@@ -211,9 +190,8 @@ export default function AnimatedProjectCard({
 
         {/* Animated corner */}
         <div
-          className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-primary to-purple-500 transition-all duration-300 transform origin-top-right ${
-            isHovered ? "scale-100" : "scale-0"
-          }`}
+          className={`absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-primary to-purple-500 transition-all duration-300 transform origin-top-right ${isHovered ? "scale-100" : "scale-0"
+            }`}
           style={{
             clipPath: "polygon(100% 0, 100% 100%, 0 0)",
           }}

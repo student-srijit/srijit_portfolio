@@ -175,7 +175,7 @@ export default function FloatingTechIcons() {
   ];
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 opacity-30 dark:opacity-20">
+    <div className="hidden md:block fixed inset-0 pointer-events-none z-0 opacity-30 dark:opacity-20">
       {techIcons.map((tech, index) => (
         <div
           key={index}

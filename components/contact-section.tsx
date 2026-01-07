@@ -31,9 +31,17 @@ export default function ContactSection() {
     setIsSubmitting(true);
 
     try {
-      // In a real implementation, you would send the data to your backend
-      // For demonstration, we'll simulate a successful submission
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
 
       setSubmitted(true);
       setFormData({ name: "", email: "", subject: "", message: "" });
@@ -42,7 +50,7 @@ export default function ContactSection() {
       setTimeout(() => setSubmitted(false), 5000);
     } catch (error) {
       console.error("Error submitting form:", error);
-      // Handle error state here
+      alert("Failed to send message. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -76,19 +84,7 @@ export default function ContactSection() {
             </Card>
           </div>
 
-          <div className="transform transition-all duration-200 hover:scale-103 hover:translate-x-1">
-            <Card className="overflow-hidden border-l-4 border-l-primary">
-              <CardContent className="flex items-center gap-4 p-4">
-                <div className="bg-primary/10 p-3 rounded-full">
-                  <Phone className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-medium">Phone</h4>
-                  <p className="text-muted-foreground">+91 73846 62005</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+
 
           <div className="transform transition-all duration-200 hover:scale-103 hover:translate-x-1">
             <Card className="overflow-hidden border-l-4 border-l-primary">
@@ -251,7 +247,7 @@ return <Form onSubmit={sendMessage} />;
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="John Doe"
+                      placeholder="Your Name"
                       className="border-muted-foreground/20 focus:border-primary transition-all duration-300 group-hover:border-primary/50"
                       required
                     />
@@ -270,7 +266,7 @@ return <Form onSubmit={sendMessage} />;
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="john@example.com"
+                      placeholder="yourname@example.com"
                       className="border-muted-foreground/20 focus:border-primary transition-all duration-300 group-hover:border-primary/50"
                       required
                     />

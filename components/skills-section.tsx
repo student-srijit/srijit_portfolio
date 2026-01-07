@@ -1,267 +1,140 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Code, Layout, Server, Braces, Terminal, Cpu } from "lucide-react";
-import { useScrollAnimation } from "@/hooks/use-scroll-animation";
-import SkillsDialog from "@/components/skills-dialog";
+import { useState, useRef } from "react";
+import { motion, useScroll, useTransform, useSpring, useMotionValue, useMotionTemplate } from "framer-motion";
+import { Layout, Terminal, Cpu, Code, Database, Globe, Server, Smartphone, Wrench } from "lucide-react";
+
+const languages = [
+  { name: "JavaScript", color: "#f7df1e", icon: "JS" },
+  { name: "TypeScript", color: "#3178c6", icon: "TS" },
+  { name: "Python", color: "#3776ab", icon: "PY" },
+  { name: "C++", color: "#00599c", icon: "C++" },
+  { name: "HTML/CSS", color: "#e34c26", icon: "< >" },
+];
+
+const frameworks = [
+  { name: "React", icon: <Globe className="w-6 h-6" />, color: "text-cyan-400" },
+  { name: "Next.js", icon: <Layout className="w-6 h-6" />, color: "text-white" },
+  { name: "Node.js", icon: <Server className="w-6 h-6" />, color: "text-green-500" },
+  { name: "PyTorch", icon: <Cpu className="w-6 h-6" />, color: "text-orange-500" },
+  { name: "TensorFlow", icon: <Database className="w-6 h-6" />, color: "text-yellow-500" },
+  { name: "Flutter", icon: <Smartphone className="w-6 h-6" />, color: "text-blue-400" },
+];
+
+const tools = [
+  "Git", "Docker", "AWS", "Figma", "MongoDB", "PostgreSQL", "Linux", "Vercel"
+];
 
 export default function SkillsSection() {
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<{
-    name: string;
-    skills: { name: string }[];
-    color: string;
-  } | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  useScrollAnimation();
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
 
-  // Intersection Observer for scroll animation
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-    return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
-      }
-    };
-  }, []);
-
-  const technicalSkills = [
-    { name: "HTML/CSS", category: "frontend" },
-    { name: "JavaScript", category: "frontend" },
-    { name: "React.js", category: "frontend" },
-    { name: "Next.js", category: "frontend" },
-    { name: "Tailwind CSS", category: "frontend" },
-    { name: "TypeScript", category: "frontend" },
-    { name: "Node.js", category: "backend" },
-    { name: "Express.js", category: "backend" },
-    { name: "MongoDB", category: "backend" },
-    { name: "SQL", category: "backend" },
-    { name: "RESTful APIs", category: "backend" },
-    { name: "GraphQL", category: "backend" },
-    { name: "Data Structures", category: "dsa" },
-    { name: "Algorithms", category: "dsa" },
-    { name: "Problem Solving", category: "dsa" },
-    { name: "Time Complexity", category: "dsa" },
-    { name: "Space Complexity", category: "dsa" },
-    { name: "Git/GitHub", category: "tools" },
-    { name: "Docker", category: "tools" },
-    { name: "CI/CD", category: "tools" },
-    { name: "Testing", category: "tools" },
-  ];
-
-  const dsaTopics = [
-    "Arrays & Strings",
-    "Linked Lists",
-    "Stacks & Queues",
-    "Trees & Graphs",
-    "Sorting Algorithms",
-    "Searching Algorithms",
-    "Dynamic Programming",
-    "Greedy Algorithms",
-    "Recursion & Backtracking",
-    "Hashing",
-  ];
-
-  const languages = ["JavaScript", "TypeScript", "Python", "C++"];
-
-  const skillCategories = [
-    {
-      name: "Frontend Development",
-      icon: <Layout className="h-6 w-6" />,
-      color: "from-blue-500 to-cyan-500",
-      skills: technicalSkills.filter((skill) => skill.category === "frontend"),
-    },
-    {
-      name: "Backend Development",
-      icon: <Server className="h-6 w-6" />,
-      color: "from-green-500 to-emerald-500",
-      skills: technicalSkills.filter((skill) => skill.category === "backend"),
-    },
-    {
-      name: "Data Structures & Algorithms",
-      icon: <Braces className="h-6 w-6" />,
-      color: "from-purple-500 to-pink-500",
-      skills: technicalSkills.filter((skill) => skill.category === "dsa"),
-    },
-    {
-      name: "Tools & Technologies",
-      icon: <Terminal className="h-6 w-6" />,
-      color: "from-amber-500 to-orange-500",
-      skills: technicalSkills.filter((skill) => skill.category === "tools"),
-    },
-  ];
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
-    <div ref={containerRef} className="space-y-12">
-      {/* Skill Categories */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {skillCategories.map((category, idx) => (
-          <div
-            key={category.name}
-            className={`transform transition-all duration-1000 ${
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-20"
-            }`}
-            style={{ transitionDelay: `${0.2 * idx}s` }}
-          >
-            <Card className="h-full overflow-hidden border-2 hover:border-primary transition-all duration-300 hover:shadow-xl light-mode-card group">
-              <CardContent className="p-6">
-                <div
-                  className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 bg-gradient-to-br ${category.color} text-white transform transition-all duration-300 group-hover:scale-110`}
-                >
-                  {category.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-                  {category.name}
-                </h3>
-                <div className="space-y-3">
-                  {category.skills.slice(0, 3).map((skill) => (
-                    <div key={skill.name}>
-                      <span className="font-medium text-sm">{skill.name}</span>
-                    </div>
-                  ))}
-                  {category.skills.length > 3 && (
-                    <p
-                      className="text-xs text-primary mt-2 cursor-pointer hover:underline"
-                      onClick={() => {
-                        setSelectedCategory({
-                          name: category.name,
-                          skills: category.skills,
-                          color: category.color,
-                        });
-                        setDialogOpen(true);
-                      }}
-                    >
-                      +{category.skills.length - 3} more skills
-                    </p>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+    <div ref={containerRef} className="relative min-h-[800px] flex flex-col items-center justify-center perspective-1000">
+
+      {/* Floating 3D Language Orbs */}
+      <div className="flex flex-wrap justify-center gap-8 mb-20 w-full max-w-6xl z-10">
+        {languages.map((lang, i) => (
+          <SkillOrb key={lang.name} skill={lang} index={i} />
         ))}
       </div>
 
-      {/* Detailed Skills Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div
-          className={`transform transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
-          }`}
-          style={{ transitionDelay: "0.4s" }}
-        >
-          <Card className="h-full overflow-hidden border-2 hover:border-primary transition-all duration-300 hover:shadow-xl">
-            <CardContent className="pt-6">
-              <h3 className="text-2xl font-semibold mb-6 flex items-center">
-                <span className="bg-primary/20 text-primary p-2 rounded-md mr-3 animate-pulse-slow">
-                  <Cpu className="h-6 w-6" />
-                </span>
-                <span className="relative">
-                  Programming Languages
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-                </span>
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {languages.map((language, index) => (
-                  <div
-                    key={language}
-                    className="reveal-rotate stagger-1"
-                    style={{ transitionDelay: `${0.2 * index}s` }}
-                  >
-                    <div className="bg-muted/50 rounded-lg p-4 text-center hover:bg-primary/10 transition-all duration-300 hover:scale-105 transform border-2 border-transparent hover:border-primary group h-full flex flex-col justify-center">
-                      <div className="mb-2">
-                        {language === "JavaScript" && (
-                          <div className="text-yellow-500 text-3xl flex justify-center">
-                            JS
-                          </div>
-                        )}
-                        {language === "TypeScript" && (
-                          <div className="text-blue-500 text-3xl flex justify-center">
-                            TS
-                          </div>
-                        )}
-                        {language === "Python" && (
-                          <div className="text-blue-600 text-3xl flex justify-center">
-                            PY
-                          </div>
-                        )}
-                        {language === "C++" && (
-                          <div className="text-purple-500 text-3xl flex justify-center">
-                            C++
-                          </div>
-                        )}
-                      </div>
-                      <h4 className="font-medium text-lg group-hover:text-primary transition-colors">
-                        {language}
-                      </h4>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div
-          className={`transform transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
-          }`}
-          style={{ transitionDelay: "0.6s" }}
-        >
-          <Card className="h-full overflow-hidden border-2 hover:border-primary transition-all duration-300 hover:shadow-xl">
-            <CardContent className="pt-6">
-              <h3 className="text-2xl font-semibold mb-6 flex items-center">
-                <span className="bg-primary/20 text-primary p-2 rounded-md mr-3 animate-pulse-slow">
-                  <Code className="h-6 w-6" />
-                </span>
-                <span className="relative">
-                  DSA Topics
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-                </span>
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {dsaTopics.map((topic, index) => (
-                  <div
-                    key={topic}
-                    className="reveal-scale stagger-1"
-                    style={{ transitionDelay: `${0.1 * index}s` }}
-                  >
-                    <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-primary/10 transition-all duration-300 group border border-transparent hover:border-primary/30">
-                      <div className="w-2 h-2 rounded-full bg-primary"></div>
-                      <span className="font-medium group-hover:text-primary transition-colors">
-                        {topic}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+      {/* Glassmorphic Tech Stack Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl px-4">
+        <TechCard title="Frameworks & Libraries" items={frameworks} type="frameworks" />
+        <TechCard title="Tools & Platforms" items={tools} type="tools" />
       </div>
 
-      {selectedCategory && (
-        <SkillsDialog
-          isOpen={dialogOpen}
-          onClose={() => setDialogOpen(false)}
-          category={selectedCategory.name}
-          skills={selectedCategory.skills}
-          color={selectedCategory.color}
-        />
-      )}
+      {/* Background Elements */}
+      <motion.div
+        className="absolute inset-0 -z-10 opacity-20"
+        style={{
+          backgroundImage: "radial-gradient(circle at center, #4f46e5 0%, transparent 70%)",
+          y,
+          opacity
+        }}
+      />
     </div>
+  );
+}
+
+function SkillOrb({ skill, index }: { skill: any, index: number }) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = ({ clientX, clientY, currentTarget }: React.MouseEvent) => {
+    const { left, top, width, height } = currentTarget.getBoundingClientRect();
+    mouseX.set((clientX - left - width / 2) / 2);
+    mouseY.set((clientY - top - height / 2) / 2);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ delay: index * 0.1, type: "spring" }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => { mouseX.set(0); mouseY.set(0); }}
+      className="flex flex-col items-center gap-3 group cursor-pointer"
+    >
+      <motion.div
+        style={{ x: mouseX, y: mouseY }}
+        className="w-24 h-24 rounded-full bg-gradient-to-br from-white/10 to-transparent backdrop-blur-md border border-white/10 flex items-center justify-center relative shadow-[0_0_30px_rgba(255,255,255,0.05)] group-hover:shadow-[0_0_50px_rgba(79,70,229,0.3)] transition-shadow duration-500"
+      >
+        <div
+          className="text-2xl font-black"
+          style={{ color: skill.color, textShadow: `0 0 20px ${skill.color}50` }}
+        >
+          {skill.icon}
+        </div>
+
+        {/* Orbital Ring */}
+        <div className="absolute inset-0 rounded-full border border-white/5 scale-110 group-hover:scale-125 transition-transform duration-500" />
+      </motion.div>
+      <span className="font-mono text-sm text-muted-foreground group-hover:text-white transition-colors">
+        {skill.name}
+      </span>
+    </motion.div>
+  );
+}
+
+function TechCard({ title, items, type }: { title: string, items: any[], type: 'frameworks' | 'tools' }) {
+  return (
+    <motion.div
+      initial={{ y: 50, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      className="p-8 rounded-3xl bg-black/40 border border-white/5 backdrop-blur-xl relative overflow-hidden group hover:border-white/10 transition-colors"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+      <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+        {type === 'frameworks' ? <Code className="w-5 h-5 text-purple-400" /> : <Wrench className="w-5 h-5 text-orange-400" />}
+        {title}
+      </h3>
+
+      <div className="flex flex-wrap gap-3">
+        {type === 'frameworks' ? (
+          items.map((item: any, i: number) => (
+            <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+              <span className={item.color}>{item.icon}</span>
+              <span className="text-sm font-medium">{item.name}</span>
+            </div>
+          ))
+        ) : (
+          items.map((item: string, i: number) => (
+            <span key={i} className="px-3 py-1 rounded-full bg-white/5 border border-white/5 text-xs font-mono text-muted-foreground hover:text-white hover:border-white/20 transition-all">
+              {item}
+            </span>
+          ))
+        )}
+      </div>
+    </motion.div>
   );
 }

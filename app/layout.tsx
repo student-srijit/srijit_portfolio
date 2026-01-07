@@ -5,6 +5,9 @@ import { ThemeProvider } from "@/components/theme-provider"
 export const metadata = {
   title: "Srijit Das | Web Developer Portfolio",
   description: "Portfolio of Srijit Das, a Full Stack Web Developer specializing in modern web applications.",
+  icons: {
+    icon: "/profile-image.jpg",
+  },
 }
 
 export default function RootLayout({

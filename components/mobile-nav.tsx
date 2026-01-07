@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
@@ -14,6 +15,11 @@ export default function MobileNav({
   onNavigate,
 }: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -37,6 +43,7 @@ export default function MobileNav({
     { name: "Projects", section: "projects" },
     { name: "Skills", section: "skills" },
     { name: "DSA", section: "achievements" },
+    { name: "Hobbies", section: "hobbies" },
     { name: "Contact", section: "contact" },
   ];
 
@@ -47,18 +54,18 @@ export default function MobileNav({
         size="icon"
         onClick={toggleMenu}
         aria-label="Toggle menu"
-        className="relative z-mobile-menu-toggle" // Add this class to ensure it's above other elements
+        className="relative z-[100]"
       >
         <Menu className="h-6 w-6" />
       </Button>
 
-      {isOpen && (
+      {isOpen && mounted && createPortal(
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-mobile-menu-overlay lg:hidden animate-fadeIn"
+          className="fixed inset-0 bg-black/80 z-[9998] lg:hidden animate-fadeIn"
           onClick={toggleMenu}
         >
           <div
-            className="fixed top-0 right-0 h-[85vh] w-[85%] max-w-[280px] bg-background border-l p-4 overflow-y-auto animate-slideInRight z-mobile-menu-content shadow-lg"
+            className="fixed top-0 right-0 h-screen w-[85%] max-w-[320px] bg-background text-foreground border-l p-4 overflow-y-auto animate-slideInRight z-[9999] shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-end mb-6">
@@ -73,16 +80,15 @@ export default function MobileNav({
               </Button>
             </div>
 
-            <nav className="space-y-4">
+            <nav className="space-y-4 text-foreground">
               {menuItems.map((item) => (
                 <a
                   key={item.section}
                   href={`#${item.section}`}
-                  className={`block text-base font-medium py-2 border-l-4 pl-3 transition-colors ${
-                    activeSection === item.section
-                      ? "border-primary text-primary"
-                      : "border-transparent hover:text-primary hover:border-primary/50"
-                  }`}
+                  className={`block text-base font-medium py-2 border-l-4 pl-3 transition-colors ${activeSection === item.section
+                    ? "border-primary text-primary"
+                    : "border-transparent hover:text-primary hover:border-primary/50"
+                    }`}
                   onClick={(e) => {
                     e.preventDefault();
                     handleNavigation(item.section);
@@ -102,7 +108,8 @@ export default function MobileNav({
               </Button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
