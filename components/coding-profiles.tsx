@@ -425,23 +425,23 @@ export default function CodingProfiles() {
                                                 initial={{ opacity: 0, y: 10 }}
                                                 animate={{ opacity: 1, y: 0 }}
                                                 transition={{ delay: i * 0.1 }}
-                                                className="flex items-center justify-between group cursor-pointer hover:bg-white/5 p-4 rounded-2xl border border-transparent hover:border-white/10 transition-all"
+                                                className="flex flex-col sm:flex-row sm:items-center justify-between items-start gap-3 group cursor-pointer hover:bg-white/5 p-4 rounded-2xl border border-transparent hover:border-white/10 transition-all"
                                             >
-                                                <div className="flex items-center gap-4">
-                                                    <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
+                                                <div className="flex items-center gap-4 w-full sm:w-auto">
+                                                    <div className="w-10 h-10 rounded-full bg-green-500/10 flex shrink-0 items-center justify-center text-green-500">
                                                         <Code2 className="w-5 h-5" />
                                                     </div>
-                                                    <div>
-                                                        <h4 className="text-lg font-bold text-white group-hover:text-yellow-500 transition-colors">
+                                                    <div className="min-w-0 flex-1">
+                                                        <h4 className="text-lg font-bold text-white group-hover:text-yellow-500 transition-colors truncate">
                                                             {activity.title}
                                                         </h4>
                                                         <div className="flex items-center gap-3 mt-1.5">
-                                                            <Badge className="bg-green-500/20 text-green-400 border-0 hover:bg-green-500/30 px-2 py-0.5 text-[10px] uppercase tracking-wider">Accepted</Badge>
-                                                            <span className="text-sm text-muted-foreground font-mono">{activity.lang}</span>
+                                                            <Badge className="bg-green-500/20 text-green-400 border-0 hover:bg-green-500/30 px-2 py-0.5 text-[10px] uppercase tracking-wider shrink-0">Accepted</Badge>
+                                                            <span className="text-sm text-muted-foreground font-mono truncate">{activity.lang}</span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <span className="text-sm text-muted-foreground font-medium">{formatTime(undefined, activity.timestamp)}</span>
+                                                <span className="text-sm text-muted-foreground font-medium pl-[3.5rem] sm:pl-0">{formatTime(undefined, activity.timestamp)}</span>
                                             </motion.div>
                                         ))
                                     ) : (
@@ -537,11 +537,11 @@ export default function CodingProfiles() {
 
                         {/* GitHub Activity / Repos Tabs */}
                         <Card className="lg:col-span-2 bg-[#0d1117]/80 border-none ring-1 ring-white/10 backdrop-blur-xl rounded-3xl p-2 h-full flex flex-col">
-                            <div className="flex items-center justify-between p-6 border-b border-white/5">
+                            <div className="flex flex-col md:flex-row md:items-center justify-between p-6 border-b border-white/5 gap-4">
                                 <h3 className="text-xl font-bold text-white flex items-center gap-2">
                                     {ghTab === "activity" ? "Contribution Activity" : "Popular Repositories"}
                                 </h3>
-                                <div className="flex gap-1 bg-white/5 p-1 rounded-lg">
+                                <div className="flex gap-1 bg-white/5 p-1 rounded-lg self-start md:self-auto">
                                     <button
                                         onClick={() => setGhTab("activity")}
                                         className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${ghTab === "activity" ? "bg-white/10 text-white shadow-sm" : "text-muted-foreground hover:text-white"}`}
