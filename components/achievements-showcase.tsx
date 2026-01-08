@@ -59,7 +59,7 @@ export default function AchievementsShowcase() {
                 animate={isInView ? "visible" : "hidden"}
                 className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16"
             >
-                <div className="col-span-1 md:col-span-3 mb-6 flex items-center gap-3">
+                <div className="col-span-1 md:col-span-2 mb-6 flex items-center gap-3">
                     <div className="p-2 bg-primary/10 rounded-lg">
                         <Trophy className="w-6 h-6 text-primary" />
                     </div>
