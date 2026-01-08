@@ -57,9 +57,9 @@ export default function AchievementsShowcase() {
                 variants={containerVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
-                className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16"
+                className="flex flex-wrap justify-center gap-6 mb-16"
             >
-                <div className="col-span-1 md:col-span-2 mb-6 flex items-center gap-3">
+                <div className="w-full mb-6 flex items-center gap-3">
                     <div className="p-2 bg-primary/10 rounded-lg">
                         <Trophy className="w-6 h-6 text-primary" />
                     </div>
@@ -73,7 +73,7 @@ export default function AchievementsShowcase() {
                             key={index}
                             variants={itemVariants}
                             whileHover={{ y: -5 }}
-                            className="relative group"
+                            className="relative group w-full md:w-[32%]"
                         >
                             <div
                                 className={`absolute inset-0 bg-gradient-to-br ${stat.color === "bg-yellow-500" ? "from-yellow-500/20 to-orange-500/5" :
