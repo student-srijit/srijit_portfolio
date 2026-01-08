@@ -164,13 +164,7 @@ export const newAchievements = {
             detail: "Consistently ranked among top teams",
             color: "bg-blue-500"
         },
-        {
-            icon: "GitPullRequest",
-            value: "Guardian",
-            title: "LeetCode Badge",
-            detail: "Top tier competitive programming ranking",
-            color: "bg-orange-500"
-        }
+
     ],
     items: [
         {
