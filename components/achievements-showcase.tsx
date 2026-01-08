@@ -57,7 +57,7 @@ export default function AchievementsShowcase() {
                 variants={containerVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
-                className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16"
             >
                 <div className="col-span-1 md:col-span-3 mb-6 flex items-center gap-3">
                     <div className="p-2 bg-primary/10 rounded-lg">
@@ -77,8 +77,8 @@ export default function AchievementsShowcase() {
                         >
                             <div
                                 className={`absolute inset-0 bg-gradient-to-br ${stat.color === "bg-yellow-500" ? "from-yellow-500/20 to-orange-500/5" :
-                                        stat.color === "bg-blue-500" ? "from-blue-500/20 to-cyan-500/5" :
-                                            "from-orange-500/20 to-red-500/5"
+                                    stat.color === "bg-blue-500" ? "from-blue-500/20 to-cyan-500/5" :
+                                        "from-orange-500/20 to-red-500/5"
                                     } rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
                             />
                             <Card className="h-full bg-[#0d1117]/80 border-white/10 backdrop-blur-sm overflow-hidden rounded-3xl relative z-10 hover:border-white/20 transition-all">
@@ -86,8 +86,8 @@ export default function AchievementsShowcase() {
                                     <div className="flex justify-between items-start mb-6">
                                         <div
                                             className={`p-3 rounded-2xl ${stat.color === "bg-yellow-500" ? "bg-yellow-500/10 text-yellow-500" :
-                                                    stat.color === "bg-blue-500" ? "bg-blue-500/10 text-blue-500" :
-                                                        "bg-orange-500/10 text-orange-500"
+                                                stat.color === "bg-blue-500" ? "bg-blue-500/10 text-blue-500" :
+                                                    "bg-orange-500/10 text-orange-500"
                                                 }`}
                                         >
                                             <Icon className="w-8 h-8" />
