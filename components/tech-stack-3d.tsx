@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Physics, useSphere, usePlane } from "@react-three/cannon";
 import { Decal, Environment, OrbitControls, MeshReflectorMaterial, Float } from "@react-three/drei";
@@ -27,22 +27,34 @@ const COLORS = [
 
 function Floor(props: any) {
     const [ref] = usePlane(() => ({ type: "Static", position: [0, -2, 0], rotation: [-Math.PI / 2, 0, 0], ...props }));
+
+    // Check if mobile for fallback material
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        setIsMobile(window.innerWidth < 768);
+    }, []);
+
     return (
-        <mesh ref={ref as any} receiveShadow>
+        <mesh ref={ref as any} receiveShadow={!isMobile}>
             <planeGeometry args={[100, 100]} />
-            <MeshReflectorMaterial
-                blur={[300, 100]}
-                resolution={512} // Reduced from 1024 for performance
-                mixBlur={1}
-                mixStrength={40}
-                roughness={1}
-                depthScale={1.2}
-                minDepthThreshold={0.4}
-                maxDepthThreshold={1.4}
-                color="#101010"
-                metalness={0.5}
-                mirror={0}
-            />
+            {isMobile ? (
+                // Simple material for mobile to avoid expensive reflections
+                <meshStandardMaterial color="#101010" roughness={0.1} metalness={0.5} />
+            ) : (
+                <MeshReflectorMaterial
+                    blur={[300, 100]}
+                    resolution={512} // Reduced from 1024 for performance
+                    mixBlur={1}
+                    mixStrength={40}
+                    roughness={1}
+                    depthScale={1.2}
+                    minDepthThreshold={0.4}
+                    maxDepthThreshold={1.4}
+                    color="#101010"
+                    metalness={0.5}
+                    mirror={0}
+                />
+            )}
         </mesh>
     );
 }
@@ -165,15 +177,42 @@ function BallSpawner() {
 }
 
 export default function TechStack3D() {
+    // Smart Pausing: Track visibility
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [inView, setInView] = useState(true);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        setIsMobile(window.innerWidth < 768);
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setInView(entry.isIntersecting);
+            },
+            { threshold: 0 }
+        );
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <div className="w-full h-[600px] relative">
-            <Canvas shadows dpr={[1, 1.5]} camera={{ position: [0, 5, 12], fov: 45 }}>
+        <div ref={containerRef} className="w-full h-[600px] relative">
+            <Canvas
+                shadows={!isMobile}
+                frameloop={inView ? "always" : "never"} // Pause when not looking
+                dpr={isMobile ? [1, 1] : [1, 1.5]} // Lower pixel ratio on mobile
+                camera={{ position: [0, 5, 12], fov: 45 }}
+            >
                 <ambientLight intensity={0.5} />
                 <directionalLight
-                    castShadow
+                    castShadow={!isMobile} // Disable shadows on mobile
                     position={[10, 20, 10]}
                     intensity={1.5}
-                    shadow-mapSize={[512, 512]} // Reduced from 1024
+                    shadow-mapSize={[512, 512]}
                 />
                 {/* Environment for realistic reflections */}
                 <Environment preset="city" />
